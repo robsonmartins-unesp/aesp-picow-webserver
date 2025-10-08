@@ -1,13 +1,69 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <title>11.7.Raspberry Pi PicoW LED ON/OFF - Robson Martins</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        .on {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .off {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+    <script>
+        function sendCommand(url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Erro na requisição");
+                    }
+                    alert("Comando enviado com sucesso!");
+                })
+                .catch(error => {
+                    alert("Falha ao enviar comando: " + error.message);
+                });
+        }
+    </script>
+</head>
 <body>
-	<h1>Raspberry Pi Pico W LED ON/OFF</h1>
-	<h2>MicroPython Web Server Example with 2 LEDs</h2>
-	<form>
-		<button name="LED0" button style="color:green" value="ON" type="submit">LED0 ON</button>
-		<button name="LED0" button style="color=red" value="OFF" type="submit">LED0 OFF</button><br><br>
-		<button name="LED1" button style="color:green" value="ON" type="submit">LED1 ON</button>
-		<button name="LED1" button style="color:red" value="OFF" type="submit">LED1 OFF</button>
-	</form>
+    <h1>Raspberry Pi Pico W LED ON/OFF</h1>
+    <h2>MicroPython Web Server Example with 2 LEDs</h2>
+    <h3>Robson Martins</h3>
+
+    <button class="on" onclick="sendCommand('https://api.thingspeak.com/update?api_key=3PQJM6YBJU32PFM0&field4=1')">
+        Ligar LED1
+    </button>
+    <button class="off" onclick="sendCommand('https://api.thingspeak.com/update?api_key=3PQJM6YBJU32PFM0&field4=0')">
+        Desligar LED1
+    </button>
+
+    <br><br>
+
+    <button class="on" onclick="sendCommand('https://api.thingspeak.com/update?api_key=3PQJM6YBJU32PFM0&field5=1')">
+        Ligar LED2
+    </button>
+    <button class="off" onclick="sendCommand('https://api.thingspeak.com/update?api_key=3PQJM6YBJU32PFM0&field5=0')">
+        Desligar LED2
+    </button>
+
 </body>
 </html>
